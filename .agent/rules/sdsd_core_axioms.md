@@ -39,3 +39,31 @@ These axioms are non-negotiable operational principles within any Spec-Driven Se
 - Sycophancy and shared blind spots occur when the same LLM context generates and verifies code.
 - Reviewer agents must use independent model architectures (e.g., Gemini auditing Claude, or separate instances with adversarial system prompts).
 - Deterministic linters, SAST tools, and test suites provide objective arbitration.
+
+---
+
+### Axiom 5: Dynamic Triad Reallocation
+> **Engineering capacity is modular and dynamic; triads reallocate between greenfield innovation and maintenance without structural friction.**
+
+- Enterprise engineering is not solely about greenfield feature generation; continuous maintenance, telemetry enhancement, and defect resolution consume substantial operational bandwidth.
+- Triads represent portable, self-contained atomic units of execution.
+- Depending on seasonal demand, operational debt, or strategic pivots, organizations dynamically scale triads up or down across workstreams without reconfiguring organizational hierarchy or introducing handoff delays.
+
+---
+
+### Axiom 6: The Analog Resilience Drill
+> **Cognitive muscle and manual software engineering craft must be deliberately exercised to prevent deskilling.**
+
+- Over-reliance on generative AI introduces intellectual atrophy and operational vulnerability in the event of upstream model failure or tooling disruption.
+- SDSD mandates periodic "analog sprints" (a 3:1 operational rhythm—3 weeks AI-augmented, 1 week manual—or a mandatory quarterly analog drill).
+- During analog exercises, human triads analyze, model, and implement features end-to-end without AI assistance, reinforcing that deep human analysis, systems orchestration, and core engineering craftsmanship remain the paramount assets.
+
+---
+
+### Axiom 7: Universal Legacy Invariant Envelopes
+> **Legacy monolithic codebases require the exact same contract guardrails as greenfield systems.**
+
+- In legacy brownfield environments, generative AI poses severe regression risks due to unmapped coupling and tribal knowledge.
+- SDSD addresses legacy fear by locking existing files behind untouchable-file perimeters, establishing Strangler-Fig anti-corruption layers, and defining explicit negative constraints before permitting agent modification.
+- Agents operate strictly within bounded blast radii, transforming fragile legacy codebases into secure, contractually verified platforms.
+

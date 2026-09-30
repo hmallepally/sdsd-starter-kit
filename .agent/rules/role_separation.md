@@ -89,3 +89,30 @@ To maintain overarching architectural cohesion and strategic alignment, manageme
 
 * **1 Dedicated Product Manager:** Oversees strategic product portfolio roadmap, cross-pod customer priorities, and executive stakeholder alignment.
 * **1 Dedicated Engineering Manager:** Provides cross-aggregate architectural governance, audits API contracts, manages operational infrastructure, and leads talent development and performance coaching.
+
+---
+
+## 🔄 Dynamic Triad Reallocation Across Workstreams
+
+Enterprise value streams require continuous balancing between greenfield innovation and operational maintenance:
+* **Modular Portability:** Triads are modular execution units possessing end-to-end domain, contract, and architectural capabilities.
+* **Workstream Ramping:** When operational telemetry indicates rising technical debt or seasonal maintenance demands, organizations seamlessly reallocate triads from greenfield pods to maintenance streams without architectural retooling.
+* **Interpersonal Cohesion:** The triad operates on deep mutual trust and shared context, evaluating scope options, trade-offs, and opportunity costs far beyond mechanical code generation.
+
+---
+
+## 🛡️ Analog Readiness Drills (Anti-Deskilling Protocol)
+
+To combat cognitive atrophy and guarantee business continuity:
+* **The 3:1 Cadence / Quarterly Analog Drill:** For 3 weeks, triads operate at maximum velocity with multi-agent orchestration. During the 4th week (or in a dedicated 1-week quarterly exercise), triads execute end-to-end specification, modeling, and coding completely **without AI tooling**.
+* **Craft Validation:** This protocol validates that human engineers maintain deep hands-on command of syntax, algorithms, domain logic, and testing frameworks, ensuring total organizational resilience if upstream model APIs experience extended outages.
+
+---
+
+## 🏛️ Universal Legacy Invariant Envelopes (Brownfield Modernization)
+
+Legacy monolithic systems benefit from the exact same SDSD contractual rigor:
+* **Untouchable-File Baselines:** Before touching legacy codebases, engineers formally establish blast-radius boundaries locking critical legacy components.
+* **Strangler-Fig Anti-Corruption Layers:** New or refactored logic is isolated behind explicit interface contracts and negative constraints.
+* **Fearless Modernization:** Eliminates the historical fear of legacy regressions by validating every generative step against strict, executable contract tests.
+

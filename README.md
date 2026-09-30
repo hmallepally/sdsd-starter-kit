@@ -70,6 +70,21 @@ SDSD restructures engineering teams into self-sufficient cells based on the **SD
   * **1 Junior Triad (Apprenticeship):** Junior talent actively pairs with and shadows senior triads, learning formal invariant modeling and agent steering on real systems.
 * **Zero Ceremonial Overhead:** All ad-hoc process roles (dedicated Scrum Masters, agile coaches, ticket coordinators) are eliminated. The team is completely self-sufficient.
 * **Two-Team Management Layer:** For every **2 Teams (18 engineers / 6 triads)**, leadership is provided by **1 Product Manager** (strategic roadmap alignment) and **1 Engineering Manager** (cross-aggregate architecture & career mentorship).
+* **Dynamic Triad Reallocation:** Pods are modular and self-contained; organizations ramp triads up or down across greenfield feature generation and operational maintenance/telemetry workstreams based on workload without organizational friction.
+
+---
+
+## 🧭 The 7 Core Operational Axioms
+
+All workflows in this starter kit adhere strictly to the foundational axioms codified in [`.agent/rules/sdsd_core_axioms.md`](.agent/rules/sdsd_core_axioms.md):
+
+1. **The Disposable Code Principle:** Code is ephemeral; the machine-readable contract is the single source of truth.
+2. **Negative Constraint Supremacy:** Specifying what the system must *never* do is exponentially more protective than specifying what it should do.
+3. **Blast-Radius Enclosure:** Autonomous agents operate within immutable file-boundary perimeters with locked untouchable files.
+4. **Epistemic Decoupling:** Verification agents run on independent model architectures to eliminate sycophancy.
+5. **Dynamic Triad Reallocation:** High portability across greenfield innovation, defect remediation, and maintenance streams.
+6. **The Analog Resilience Drill:** 3:1 cadence or quarterly manual sprints to exercise cognitive muscle and prevent deskilling.
+7. **Universal Legacy Invariant Envelopes:** Brownfield monoliths protected via locked baselines and Strangler-Fig anti-corruption boundaries.
 
 ---
 
@@ -125,4 +140,7 @@ python tests/test_sdsd_validate.py
 
 1. **Blast-Radius Enforcement:** Specify files that AI agents are strictly forbidden to touch.
 2. **Negative Constraints:** Explicitly tell AI what the system must *never* do to eliminate CWE security bugs.
-3. **Emergency Hot-Patch Protocol (24-Hour SLA):** Manual hot-patches during P1 outages trigger an automatic `SPEC-DRIFT` CI alert with a strict 24-hour SLA to update the specification before any non-emergency code can deploy.
+3. **Analog Readiness Drills (Quarterly / 3:1):** Dedicated manual sprints where human triads execute without AI to maintain sharp engineering craft.
+4. **Universal Legacy Invariants:** Safeguards brownfield systems via untouchable baselines and Strangler-Fig anti-corruption envelopes.
+5. **Emergency Hot-Patch Protocol (24-Hour SLA):** Manual hot-patches during P1 outages trigger an automatic `SPEC-DRIFT` CI alert with a strict 24-hour SLA to update the specification before any non-emergency code can deploy.
+
