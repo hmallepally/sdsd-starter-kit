@@ -1,0 +1,43 @@
+name: SDSD Spec-Drift Verification Guardrail
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+    branches: [main, master]
+
+jobs:
+  check-spec-drift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for Spec Drift
+        run: |
+          echo "=== SDSD SPEC-DRIFT GUARDRAIL ==="
+          
+          # Check if PR has emergency hotpatch label
+          if [[ "${{ contains(github.event.pull_request.labels.*.name, 'HOTPATCH-P1') }}" == "true" ]]; then
+            echo "⚠️ HOTPATCH-P1 detected! Bypassing spec-drift block under 24-hour SLA."
+            echo "::warning title=SPEC-DRIFT-ACTIVE::Emergency hotpatch merged. Spec must be synchronized within 24 hours."
+            exit 0
+          fi
+
+          # Identify changed files
+          CHANGED_CODE=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '^(src|lib|app)/' || true)
+          CHANGED_SPECS=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -E '^specs/' || true)
+
+          echo "Changed code files: $CHANGED_CODE"
+          echo "Changed spec files: $CHANGED_SPECS"
+
+          if [ -n "$CHANGED_CODE" ] && [ -z "$CHANGED_SPECS" ]; then
+            echo "❌ SPEC-DRIFT VIOLATION DETECTED!"
+            echo "Code files in src/ or lib/ were modified without a corresponding update or addition in specs/."
+            echo "In SDSD: Never patch code directly; patch the specification first."
+            echo "To fix: Update the relevant specification in specs/ or declare an emergency with the 'HOTPATCH-P1' label."
+            exit 1
+          fi
+
+          echo "✅ Spec-drift verification passed: Specification changes accompany code modifications."

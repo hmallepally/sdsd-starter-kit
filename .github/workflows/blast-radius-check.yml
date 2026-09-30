@@ -1,0 +1,51 @@
+name: SDSD Blast-Radius Boundary Check
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: [main, master]
+
+jobs:
+  check-blast-radius:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check Untouchable Baseline Files
+        run: |
+          echo "=== SDSD BLAST-RADIUS GUARDRAIL ==="
+          
+          # List of strictly untouchable paths
+          FORBIDDEN_PATTERNS=(
+            "^src/auth/"
+            "^schema/migrations/"
+            "^config/production\."
+            "^\.github/workflows/spec-drift-check\.yml"
+          )
+
+          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          VIOLATIONS=()
+
+          for pattern in "${FORBIDDEN_PATTERNS[@]}"; do
+            MATCHES=$(echo "$CHANGED_FILES" | grep -E "$pattern" || true)
+            if [ -n "$MATCHES" ]; then
+              for file in $MATCHES; do
+                VIOLATIONS+=("$file (matches forbidden boundary '$pattern')")
+              done
+            fi
+          done
+
+          if [ ${#VIOLATIONS[@]} -gt 0 ]; then
+            echo "❌ BLAST-RADIUS INVARIANT VIOLATION DETECTED!"
+            echo "The following untouchable baseline files were modified:"
+            for v in "${VIOLATIONS[@]}"; do
+              echo "  - $v"
+            done
+            echo "Autonomous agents are strictly forbidden from modifying baseline infrastructure or authentication without formal architecture sign-off."
+            exit 1
+          fi
+
+          echo "✅ Blast-radius verification passed: No untouchable files were modified."
