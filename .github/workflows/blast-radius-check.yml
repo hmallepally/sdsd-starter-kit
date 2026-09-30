@@ -49,3 +49,13 @@ jobs:
           fi
 
           echo "✅ Blast-radius verification passed: No untouchable files were modified."
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Run SDSD Specification Linter & Tests
+        run: |
+          python tools/sdsd_validate.py --all
+          python tests/test_sdsd_validate.py
