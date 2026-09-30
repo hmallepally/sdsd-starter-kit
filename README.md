@@ -61,6 +61,18 @@ sdsd-starter-kit/
 
 ---
 
+## 👥 The 2+1 Triad Team Formula (9-Person Self-Sufficient Pod)
+
+SDSD restructures engineering teams into self-sufficient cells based on the **SDSD Triad** (Product Specialist + Specification Engineer + Systems Steersperson):
+
+* **Standard Team Size: 9 Engineers (2 Regular Triads + 1 Junior Triad)**
+  * **2 Regular Triads (Senior):** Drive high-cadence production feature delivery (30–45 minute cycles) across parallel aggregate roots.
+  * **1 Junior Triad (Apprenticeship):** Junior talent actively pairs with and shadows senior triads, learning formal invariant modeling and agent steering on real systems.
+* **Zero Ceremonial Overhead:** All ad-hoc process roles (dedicated Scrum Masters, agile coaches, ticket coordinators) are eliminated. The team is completely self-sufficient.
+* **Two-Team Management Layer:** For every **2 Teams (18 engineers / 6 triads)**, leadership is provided by **1 Product Manager** (strategic roadmap alignment) and **1 Engineering Manager** (cross-aggregate architecture & career mentorship).
+
+---
+
 ## 🚀 The 4-Step Pod Workflow (30–45 Minute Cycle)
 
 ```
