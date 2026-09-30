@@ -71,6 +71,7 @@ SDSD restructures engineering teams into self-sufficient cells based on the **SD
 * **Zero Ceremonial Overhead:** All ad-hoc process roles (dedicated Scrum Masters, agile coaches, ticket coordinators) are eliminated. The team is completely self-sufficient.
 * **Two-Team Management Layer:** For every **2 Teams (18 engineers / 6 triads)**, leadership is provided by **1 Product Manager** (strategic roadmap alignment) and **1 Engineering Manager** (cross-aggregate architecture & career mentorship).
 * **Dynamic Triad Reallocation:** Pods are modular and self-contained; organizations ramp triads up or down across greenfield feature generation and operational maintenance/telemetry workstreams based on workload without organizational friction.
+* **Dual-Workstation Pipelining (High-Latency Builds):** In enterprise environments where CI/CD and integration suites take 10–15+ minutes, equipping each triad role with dual machines or parallel sessions allows continuous task interleaving (modeling on Machine B while compiling on Machine A). Hardware idling is economically negligible compared to high-cost human engineers waiting on builds.
 
 ---
 
