@@ -49,7 +49,8 @@ sdsd-starter-kit/
 │   └── instructions/
 │       └── copilot-instructions.md # Context injection for Copilot / Antigravity / Cursor
 ├── tools/
-│   └── sdsd_validate.py           # CLI specification validator & invariant linter
+│   ├── sdsd_validate.py           # CLI specification validator, security shield & invariant linter
+│   └── sdsd_reverse_patch.py      # Automated reverse-transpiler for emergency hotpatches
 ├── templates/
 │   ├── SDSD_SPEC_TEMPLATE.md      # Standard invariant-first specification template
 │   └── EMERGENCY_HOTPATCH_SLA.md  # 24-hour spec remediation protocol for P1 outages
@@ -134,6 +135,27 @@ python tests/test_sdsd_validate.py
 3. **Formal Invariants:** Validates that preconditions, postconditions, and class invariants are present.
 4. **Explicit Negative Constraints:** Ensures the specification defines what the system must **NEVER** permit (anti-hallucination guardrail).
 5. **Executable Contract Tests:** Verifies that failing test assertions (`TC-...` or `test_should_...`) are codified.
+6. **Adversarial Prompt Injection & Exfiltration Shield:** Scans specifications for indirect prompt injection vectors, instruction override attempts, and unauthorized data exfiltration commands.
+7. **Dependency Manifest Lockdown:** Enforces strict protection of build manifests (`package.json`, `pom.xml`, `requirements.txt`, `Cargo.toml`) against automated agent modification to mitigate supply-chain poisoning.
+
+---
+
+## ⚡ Emergency Hotpatch Reverse-Specification Transpiler
+
+During Tier-1 production outages, engineers apply minimal manual hotpatches under emergency operational authority. To eliminate specification drift without slowing incident response, `tools/sdsd_reverse_patch.py` captures the emergency git diff and backward-synthesizes a fully compliant SDSD specification contract:
+
+```bash
+# Invert working-tree uncommitted changes into an emergency spec:
+python tools/sdsd_reverse_patch.py --working-tree --incident INC-98241 --output specs/hotpatches/SPEC-INC-98241.spec.md
+
+# Invert a specific commit into a spec contract:
+python tools/sdsd_reverse_patch.py --commit abc1234 --incident INC-98241
+
+# Pipe a unified diff directly from git:
+git diff main..incident-branch | python tools/sdsd_reverse_patch.py --diff - --incident INC-98241
+```
+
+The transpiler isolates modified code execution paths, infers domain aggregates, and automatically synthesizes candidate invariant constraints, negative security boundaries, untouchable file baselines, and executable red TDD regression tests (`TC-HOTPATCH-001`, `TC-HOTPATCH-002`, `TC-HOTPATCH-003`).
 
 ---
 
@@ -141,7 +163,9 @@ python tests/test_sdsd_validate.py
 
 1. **Blast-Radius Enforcement:** Specify files that AI agents are strictly forbidden to touch.
 2. **Negative Constraints:** Explicitly tell AI what the system must *never* do to eliminate CWE security bugs.
-3. **Analog Readiness Drills (Quarterly / 3:1):** Dedicated manual sprints where human triads execute without AI to maintain sharp engineering craft.
-4. **Universal Legacy Invariants:** Safeguards brownfield systems via untouchable baselines and Strangler-Fig anti-corruption envelopes.
-5. **Emergency Hot-Patch Protocol (24-Hour SLA):** Manual hot-patches during P1 outages trigger an automatic `SPEC-DRIFT` CI alert with a strict 24-hour SLA to update the specification before any non-emergency code can deploy.
+3. **Adversarial Prompt Injection Sanitization:** Automated linting for malicious prompt manipulation and exfiltration directives.
+4. **Dependency Manifest Lockdown:** Protects build manifests from autonomous poisoning.
+5. **Analog Readiness Drills (Quarterly / 3:1):** Dedicated manual sprints where human triads execute without AI to maintain sharp engineering craft.
+6. **Universal Legacy Invariants:** Safeguards brownfield systems via untouchable baselines and Strangler-Fig anti-corruption envelopes.
+7. **Emergency Hot-Patch Protocol & Reverse Transpilation:** Manual hot-patches during P1 outages trigger an automatic `SPEC-DRIFT` CI alert; `sdsd_reverse_patch.py` facilitates meeting the 24-hour SLA by generating compliant contracts within minutes.
 

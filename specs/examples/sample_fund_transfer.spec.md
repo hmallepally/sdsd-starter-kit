@@ -89,6 +89,7 @@ Autonomous agents generating code for this feature are strictly bound by the fol
 - `schema/migrations/**` (Database migrations)
 - `config/production.env` (Infrastructure configuration)
 - `.github/**` (CI/CD pipelines)
+- `package.json`, `pom.xml`, `requirements.txt`, `Cargo.toml` (Dependency manifests — Zero automated modifications permitted to prevent supply-chain poisoning)
 
 ---
 

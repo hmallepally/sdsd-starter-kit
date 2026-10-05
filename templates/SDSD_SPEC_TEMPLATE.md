@@ -19,6 +19,7 @@
 * **Untouchable Files (STRICT ZERO-MODIFICATION GUARDRAIL):**
   - `src/core/security/...`
   - `src/database/migrations/...`
+  - `package.json`, `pom.xml`, `requirements.txt`, `Cargo.toml` (Dependency manifests — zero automated changes permitted)
   - Any file outside this aggregate's bounded context.
 
 ---

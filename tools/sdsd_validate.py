@@ -11,6 +11,8 @@ Validates that an SDSD specification satisfies all formal contract requirements:
 3. Formal Invariants (Preconditions, Postconditions, Class Invariants) (Meyer, 1992)
 4. Explicit Negative Constraints ("What the system must NEVER do")
 5. Executable TDD Contract Tests defined (Beck, 2002)
+6. Adversarial Prompt Injection & Exfiltration Sanitization
+7. Dependency Manifest Blast-Radius Lockdown
 """
 
 import sys
@@ -30,8 +32,24 @@ REQUIRED_CONCEPTS = [
 
 NEGATIVE_CONSTRAINT_KEYWORDS = [r'\bnever\b', r'\bshall not\b', r'\bforbidden\b', r'\bprohibited\b']
 
+# DevSecOps Threat Vectors: Prompt Injection & Exfiltration Signatures
+ADVERSARIAL_INJECTION_PATTERNS = [
+    (r'ignore\s+(?:all\s+)?(?:previous|above)\s+instructions', 'Indirect Prompt Injection (instruction override)'),
+    (r'disregard\s+(?:all\s+)?(?:previous|above)', 'Indirect Prompt Injection (instruction bypass)'),
+    (r'\bsystem\s+override\b', 'Prompt Injection (system override attempt)'),
+    (r'\b(?:exfiltrat\w*|leak\w*)\s+(?:data|credential|token|key|secret|password|database|payload|info)\b', 'Potential Data Exfiltration directive'),
+    (r'\bcurl\s+-[dF]\b', 'Raw network exfiltration shell command'),
+    (r'https?://(?:\d{1,3}\.){3}\d{1,3}', 'Suspicious raw IP address telemetry endpoint'),
+    (r'(?:log|print|send)\s+.*(?:plaintext|unencrypted)\s+.*(?:auth|token|key|password|credential)', 'Insecure Credential Logging directive'),
+]
+
+# Dependency Manifests that must be locked down against automated agent manipulation
+DEPENDENCY_MANIFEST_PATTERNS = [
+    r'package\.json', r'pom\.xml', r'requirements\.txt', r'Cargo\.toml', r'build\.gradle', r'go\.mod'
+]
+
 def validate_spec_file(file_path: Path) -> tuple[bool, list[str], list[str]]:
-    """Validates a single .spec.md file against SDSD contract axioms."""
+    """Validates a single .spec.md file against SDSD contract axioms and DevSecOps defenses."""
     errors = []
     warnings = []
 
@@ -79,6 +97,17 @@ def validate_spec_file(file_path: Path) -> tuple[bool, list[str], list[str]]:
         if re.search(vp, content, re.IGNORECASE):
             warnings.append(f"Potentially ambiguous specification phrase detected matching '{vp}'. Replace with deterministic assertions.")
 
+    # 7. DevSecOps Defense Check: Adversarial Prompt Injection Sanitization
+    for pattern, threat_desc in ADVERSARIAL_INJECTION_PATTERNS:
+        if re.search(pattern, content, re.IGNORECASE):
+            errors.append(f"Adversarial security violation detected: {threat_desc} matching '{pattern}'.")
+
+    # 8. DevSecOps Defense Check: Dependency Manifest Lockdown
+    # Verify that if third-party libraries are mentioned, dependency manifests are safeguarded
+    has_manifest_lockdown = any(re.search(mp, content, re.IGNORECASE) for mp in DEPENDENCY_MANIFEST_PATTERNS)
+    if not has_manifest_lockdown and not re.search(r'manifest|dependencies', content, re.IGNORECASE):
+        warnings.append("Blast-radius perimeter should explicitly lock down dependency manifests (e.g., package.json, requirements.txt, pom.xml) to prevent automated supply-chain poisoning.")
+
     is_valid = len(errors) == 0
     return is_valid, errors, warnings
 
@@ -106,7 +135,7 @@ def main():
             sys.exit(1)
 
     print("=" * 80)
-    print("SPEC-DRIVEN SECURE DEVELOPMENT (SDSD) SPECIFICATION LINTER")
+    print("SPEC-DRIVEN SECURE DEVELOPMENT (SDSD) SPECIFICATION LINTER & SECURITY SHIELD")
     print("=" * 80)
 
     total_files = len(spec_files)
@@ -130,7 +159,7 @@ def main():
             is_valid = False
 
         if is_valid:
-            print("  [PASS] Specification complies with all SDSD formal contract axioms.")
+            print("  [PASS] Specification complies with all SDSD formal contract axioms and DevSecOps defenses.")
             total_passed += 1
         else:
             print("  [FAIL] Specification does not meet formal contract standards.")
