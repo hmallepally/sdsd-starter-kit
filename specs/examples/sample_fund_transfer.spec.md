@@ -71,6 +71,10 @@ Provide an atomic, idempotent fund transfer service between accounts within the 
    All SQL / database queries must use bound parameters; dynamic string concatenation is strictly forbidden.
 4. **Negative Constraint 4 (Rate Limiting):**
    A maximum of 5 transfer requests per account per minute is permitted. Excess requests must receive HTTP `429 Too Many Requests`.
+5. **Negative Constraint 5 (Non-Functional Performance Invariant $C_{\text{perf}}$):**
+   The service must NEVER execute full-table scans or load unfiltered customer ledgers into application heap memory for in-memory filtering. All balance history lookups must be indexed by `account_id` and paginated at the database layer (max page size: 50 records; p99 latency < 150ms).
+6. **Negative Constraint 6 (Runtime Environmental Precondition $C_{\text{env}}$):**
+   The distributed cache client must enforce strict configuration parity across non-production and production environments, mandating clustered topology support, TLS credential isolation, and fail-fast startup connectivity validation.
 
 ---
 

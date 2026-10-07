@@ -62,15 +62,18 @@ sdsd-starter-kit/
 
 ---
 
-## 👥 The 2+1 Triad Team Formula (9-Person Self-Sufficient Pod)
+## 👥 Team Topology: From Vanguard Pair to Operational Triads
 
 SDSD restructures engineering teams into self-sufficient cells based on the **SDSD Triad** (Product Specialist + Specification Engineer + Systems Steersperson):
 
-* **Standard Team Size: 9 Engineers (2 Regular Triads + 1 Junior Triad)**
-  * **2 Regular Triads (Senior):** Drive high-cadence production feature delivery (30–45 minute cycles) across parallel aggregate roots.
-  * **1 Junior Triad (Apprenticeship):** Junior talent actively pairs with and shadows senior triads, learning formal invariant modeling and agent steering on real systems.
-* **Zero Ceremonial Overhead:** All ad-hoc process roles (dedicated Scrum Masters, agile coaches, ticket coordinators) are eliminated. The team is completely self-sufficient.
-* **Two-Team Management Layer:** For every **2 Teams (18 engineers / 6 triads)**, leadership is provided by **1 Product Manager** (strategic roadmap alignment) and **1 Engineering Manager** (cross-aggregate architecture & career mentorship).
+* **Enterprise Pilot & Scaling Pathway (The Empirical Sweet Spot):**
+  * **Vanguard Pair Pilot:** The enterprise journey originated with a 2-engineer vanguard pilot (pairing senior development expertise with product domain specialization) operating dual AI IDEs to validate the 30–45 minute delivery cadence on a greenfield API or decoupled service.
+  * **Operational Core (2 Triads / 6 Engineers):** Once verified, the practice scaled into two synchronized senior triads (6 engineers total) operating within enterprise governance (such as SAFe Program Increments and team backlogs). Empirical telemetry confirms that two synchronized triads provide the optimal sweet spot for sustained, high-velocity delivery.
+* **The 2+1 Triad Formula (General Enterprise Scaling):**
+  * Larger organizations scale by adopting the **9-engineer pod (2 Senior Triads + 1 Junior Apprenticeship Triad)** where junior engineers shadow contract modeling and agent steering without degrading delivery velocity.
+* **Zero Ceremonial Overhead:** All ad-hoc administrative roles (dedicated Scrum Masters, agile coaches, ticket coordinators) are eliminated; human cognition is redirected entirely toward domain modeling and multi-agent systems orchestration.
+* **Shared Management Architecture:** Engineering pods are governed by a shared leadership pair (**1 Product Manager** for strategic roadmap alignment + **1 Engineering Manager** for cross-aggregate architecture & mentorship).
+* **Enterprise Toolstack Integration:** Telemetry and contracts integrate seamlessly with standard enterprise infrastructure—**Bitbucket** pull requests, **Jira** delivery tracking under SAFe, **Jenkins** automated CI pipelines, **Red Hat OpenShift Container Platform (OCP)** runtime clusters, and **Confluence** architecture blueprints.
 * **Dynamic Triad Reallocation:** Pods are modular and self-contained; organizations ramp triads up or down across greenfield feature generation and operational maintenance/telemetry workstreams based on workload without organizational friction.
 * **Dual-Workstation Pipelining (High-Latency Builds):** In enterprise environments where CI/CD and integration suites take 10–15+ minutes, equipping each triad role with dual machines or parallel sessions allows continuous task interleaving (modeling on Machine B while compiling on Machine A). Hardware idling is economically negligible compared to high-cost human engineers waiting on builds.
 
