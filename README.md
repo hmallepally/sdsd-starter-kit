@@ -34,9 +34,15 @@ SDSD is grounded in 30 years of classical software engineering contract theory m
 
 ```
 sdsd-starter-kit/
-├── .github/workflows/
-│   ├── spec-drift-check.yml       # Fails CI if code changed without a matching spec change
-│   └── blast-radius-check.yml     # Enforces untouchable file boundaries and runs linter
+├── .github/
+│   ├── copilot-instructions.md    # Native GitHub Copilot context discovery
+│   └── workflows/
+│       ├── spec-drift-check.yml   # Fails CI if code changed without a matching spec change
+│       └── blast-radius-check.yml # Enforces untouchable file boundaries and runs test suite
+├── .cursorrules                   # Cursor IDE rules for blast radius & invariant enforcement
+├── CLAUDE.md                      # Claude Code CLI operational guide
+├── pyproject.toml                 # Packaging, pytest config & CLI entry points (sdsd-validate, sdsd-reverse-patch)
+├── quickstart.py                  # One-command 30-second interactive tour of the SDSD pipeline
 ├── .agent/
 │   ├── rules/
 │   │   ├── sdsd_core_axioms.md    # Non-negotiable SDSD operational rules & DbC axioms
@@ -46,18 +52,24 @@ sdsd-starter-kit/
 │   │   ├── 02_specification_writer.md # Invariants, negative constraints, blast radius
 │   │   ├── 03_developer_tdd.md    # Strict TDD execution (failing tests first -> pass)
 │   │   └── 04_invariant_reviewer.md # Adversarial audit against invariants & sycophancy
-│   └── instructions/
-│       └── copilot-instructions.md # Context injection for Copilot / Antigravity / Cursor
+│   └── skills/
+│       └── sdsd-orchestrator/     # Antigravity agent skill definition (SKILL.md)
 ├── tools/
 │   ├── sdsd_validate.py           # CLI specification validator, security shield & invariant linter
 │   └── sdsd_reverse_patch.py      # Automated reverse-transpiler for emergency hotpatches
 ├── templates/
 │   ├── SDSD_SPEC_TEMPLATE.md      # Standard invariant-first specification template
 │   └── EMERGENCY_HOTPATCH_SLA.md  # 24-hour spec remediation protocol for P1 outages
-├── tests/
-│   └── test_sdsd_validate.py      # Automated test suite for the specification linter
-└── specs/examples/
-    └── sample_fund_transfer.spec.md # Complete reference specification
+├── specs/examples/
+│   └── sample_fund_transfer.spec.md # Complete reference specification (SPEC-001)
+├── src/domain/billing/            # Reference implementation (disposable compiled output)
+│   ├── transfer_model.py          # Account aggregate root, enums, TransferReceipt
+│   └── transfer_service.py        # Idempotent transfer coordinator with rate limiting & tenant guards
+└── tests/
+    ├── test_sdsd_validate.py      # Specification linter automated test suite
+    ├── test_sdsd_reverse_patch.py # Reverse patch transpiler automated test suite
+    └── unit/billing/
+        └── test_transfer_service.py # Red TDD contract tests (TC-TR-001 through 006 + security invariants)
 ```
 
 ---
@@ -117,19 +129,22 @@ All workflows in this starter kit adhere strictly to the foundational axioms cod
 
 ---
 
-## 🛠️ Local Verification & Specification Linting
+## 🛠️ Local Verification & Automated Testing
 
-Before feeding any specification to an autonomous developer agent, run the built-in validator to verify that it satisfies all formal contract axioms:
+You can run the entire SDSD pipeline tour in one command:
 
 ```bash
+# 30-second interactive tour of spec linting, contract tests, blast radius & hotpatch transpilation
+python quickstart.py
+
+# Run all 23 unit and contract tests across domain, linter, and transpiler
+python -m unittest discover tests
+
 # Validate a specific specification
 python tools/sdsd_validate.py specs/examples/sample_fund_transfer.spec.md
 
 # Validate all specifications in the repository
 python tools/sdsd_validate.py --all
-
-# Run the automated unit test suite
-python tests/test_sdsd_validate.py
 ```
 
 ### What `sdsd_validate.py` Checks:

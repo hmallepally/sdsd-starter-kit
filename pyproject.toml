@@ -1,0 +1,53 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "sdsd-starter-kit"
+version = "1.0.0"
+description = "Reference implementation and multi-agent orchestration toolkit for Spec-Driven Secure Development (SDSD)"
+readme = "README.md"
+authors = [
+  { name = "Harinath Mallepally", email = "hmallepally@liberty.edu" }
+]
+license = { text = "MIT" }
+classifiers = [
+  "Development Status :: 5 - Production/Stable",
+  "Intended Audience :: Developers",
+  "Intended Audience :: Science/Research",
+  "Topic :: Software Development :: Build Tools",
+  "Topic :: Software Development :: Quality Assurance",
+  "Topic :: Security",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+]
+keywords = [
+  "spec-driven development",
+  "design-by-contract",
+  "multi-agent orchestration",
+  "tdd",
+  "domain-driven design",
+  "software architecture",
+  "devsecops"
+]
+requires-python = ">=3.10"
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "pytest-cov>=4.0.0"
+]
+
+[project.scripts]
+sdsd-validate = "tools.sdsd_validate:main"
+sdsd-reverse-patch = "tools.sdsd_reverse_patch:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = "-v --strict-markers"

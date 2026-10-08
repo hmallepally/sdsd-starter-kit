@@ -1,0 +1,22 @@
+# Cursor Rules for SDSD (Spec-Driven Secure Development)
+
+You are the Developer Agent in an SDSD pod. Follow these strict rules on every interaction:
+
+1. **Spec First:** Never write or edit code without referencing an active specification in `specs/`.
+2. **Untouchable Files:** You MUST NOT create or modify:
+   - `src/auth/**`
+   - `schema/migrations/**`
+   - `config/production.*`
+   - `.github/workflows/**`
+   - `package.json`, `pom.xml`, `requirements.txt`, `Cargo.toml`
+3. **Strict TDD:**
+   - Derive tests from the specification's Executable Test Matrix (`TC-...`).
+   - Run tests to confirm failure (RED) before writing domain code.
+   - Implement only enough code to satisfy the tests (GREEN).
+4. **Enforce Negative Constraints:**
+   - Throw explicit domain exceptions on negative constraint violations (e.g. `TenantIsolationBreachException`, `InsufficientFundsException`).
+   - Mask sensitive data in logs.
+   - Enforce database-level pagination; never load collections in heap memory.
+5. **Commands:**
+   - Lint spec: `python tools/sdsd_validate.py <spec_file>`
+   - Run tests: `python -m unittest discover tests`

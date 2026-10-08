@@ -1,6 +1,8 @@
 name: SDSD Blast-Radius Boundary Check
 
 on:
+  push:
+    branches: [main, master]
   pull_request:
     types: [opened, synchronize, reopened]
     branches: [main, master]
@@ -26,7 +28,12 @@ jobs:
             "^\.github/workflows/spec-drift-check\.yml"
           )
 
-          CHANGED_FILES=$(git diff --name-only origin/${{ github.base_ref }}...HEAD)
+          if [ "${{ github.event_name }}" = "pull_request" ]; then
+            DIFF_TARGET="origin/${{ github.base_ref }}...HEAD"
+          else
+            DIFF_TARGET="HEAD~1..HEAD"
+          fi
+          CHANGED_FILES=$(git diff --name-only $DIFF_TARGET 2>/dev/null || true)
           VIOLATIONS=()
 
           for pattern in "${FORBIDDEN_PATTERNS[@]}"; do
@@ -58,4 +65,4 @@ jobs:
       - name: Run SDSD Specification Linter & Tests
         run: |
           python tools/sdsd_validate.py --all
-          python tests/test_sdsd_validate.py
+          python -m unittest discover tests
